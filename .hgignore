@@ -1,0 +1,8 @@
+syntax: glob
+bin
+parts
+develop-eggs
+pojson.egg-info
+*.pyc
+*~
+.installed.cfg
