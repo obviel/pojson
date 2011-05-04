@@ -1,2 +1,2 @@
-from pojson.convert import convert, convert_json
+from pojson.convert import po2dict, convert
 

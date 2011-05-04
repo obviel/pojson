@@ -2,37 +2,45 @@ import argh
 import simplejson
 import polib
 
-def convert(po_file):
-    """Convert po_file to dictionary data structure (ready for JSON).
+def po2dict(po):
+    """Convert po object to dictionary data structure (ready for JSON).
     """
-    # XXX encoding?
-    po = polib.pofile(po_file, autodetect_encoding=False, encoding='utf-8')
-
     result = {}
-
-    result['domain'] = domain = {}
     
-    domain[''] = po.metadata.copy()
+    result[''] = po.metadata.copy()
 
     for entry in po:
         if entry.obsolete:
             continue
         if entry.msgstr:
-
-            domain[entry.msgid] = entry.msgstr
+            result[entry.msgid] = entry.msgstr
         elif entry.msgstr_plural:
             plural = [entry.msgid_plural]
-            domain[entry.msgid] = plural
+            result[entry.msgid] = plural
             ordered_plural = sorted(entry.msgstr_plural.items())
             for order, msgstr in ordered_plural:
                 plural.append(msgstr)
     return result
 
-def convert_json(po_file, pretty_print):
-    result = convert(po_file)
-    if not pretty_print:            
-        return simplejson.dumps(result, ensure_ascii=False)
+def convert(domain, po_file, js=False, encoding=None, pretty_print=False):
+    if encoding is None:
+        po = polib.pofile(po_file,
+                          autodetect_encoding=True)
     else:
-        return simplejson.dumps(result, sort_keys=True, indent=4 * ' ',
-                                ensure_ascii=False)
+        po = polib.pofile(po_file,
+                          autodetect_encoding=False,
+                          encoding=encoding)
+    
+    domain_data = po2dict(po)
+    
+    d = { domain: domain_data }
+    if not pretty_print:
+        result = simplejson.dumps(d, ensure_ascii=False)
+    else:
+        result = simplejson.dumps(d, sort_keys=True, indent=4 * ' ',
+                                  ensure_ascii=False)
+    if js:
+        result = 'var json_locale_data = ' + result + ';'
+    return result
 
+        
