@@ -11,13 +11,14 @@ long_description = (
 
 setup(
     name='pojson',
-    version = '0.1',
+    version='0.2dev',
     description="Convert PO files to JSON",
     long_description=long_description,
     keywords='PO i18n internationalisation JSON gettext',
     author='Martijn Faassen',
     author_email='faassen@startifact.com',
     license='BSD',
+    url='https://bitbucket.org/faassen/pojson',
     packages=['pojson'],
     include_package_data = True,
     zip_safe=False,
