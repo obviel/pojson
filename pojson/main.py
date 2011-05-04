@@ -3,7 +3,7 @@ import pojson
 
 @argh.arg('-p', '--pretty-print', default=False, help="Pretty-print JSON")
 @argh.arg('-e', '--encoding', default=None, help="Encoding of PO file")
-@argh.arg('-js', '--javascript', default=False, help="Generate JS instead of JSON")
+@argh.arg('-j', '--javascript', default=False, help="Generate JS instead of JSON")
 @argh.arg('domain', help='Translation domain')
 @argh.arg('po_file', help='PO file')
 def convert(args):

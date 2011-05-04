@@ -4,16 +4,24 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
+long_description = (
+    read('README.txt')
+    + '\n' +
+    read('CHANGES.txt'))
+
 setup(
     name='pojson',
     version = '0.1',
+    description="Convert PO files to JSON",
+    long_description=long_description,
+    keywords='PO i18n internationalisation JSON gettext',
     author='Martijn Faassen',
     author_email='faassen@startifact.com',
-    long_description='',
+    license='BSD',
     packages=['pojson'],
     include_package_data = True,
     zip_safe=False,
-    license='BSD',
+    setup_requires=['hgtools'],
     install_requires=[
         'argh',
         'polib',
