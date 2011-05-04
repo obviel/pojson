@@ -35,7 +35,7 @@ def convert(domain, po_file, js=False, encoding=None, pretty_print=False):
     
     d = { domain: domain_data }
     if not pretty_print:
-        result = simplejson.dumps(d, ensure_ascii=False)
+        result = simplejson.dumps(d, ensure_ascii=False, sort_keys=True)
     else:
         result = simplejson.dumps(d, sort_keys=True, indent=4 * ' ',
                                   ensure_ascii=False)

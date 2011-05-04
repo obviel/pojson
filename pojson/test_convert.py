@@ -88,14 +88,17 @@ def test_convert_pretty_print(tmpdir):
     po.save(path)
 
     result = convert('foo', path, pretty_print=True)
-    # XXX dependent on default key sorting of simplejson
+
+    # XXX apparently different versions of simplejson use different
+    # pretty printing algorithms, so this may break
     assert result == u'''\
 {
     "foo": {
-        "": {}, 
+        "": {},
         "One": "Een"
     }
 }'''
+    
     
 
 def test_convert_javascript(tmpdir):
@@ -126,14 +129,17 @@ def test_convert_javascript_prettyprint(tmpdir):
 
     result = convert('foo', path, encoding='utf-8',
                      js=True, pretty_print=True)
-
+    
+    # XXX apparently different versions of simplejson use different
+    # pretty printing algorithms, so this may break
     assert result == u'''\
 var json_locale_data = {
     "foo": {
-        "": {}, 
+        "": {},
         "One": "Een"
     }
 };'''
+    
     
 def pytest_funcarg__nl_po(request):
     p = os.path.join(
