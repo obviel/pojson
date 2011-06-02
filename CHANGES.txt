@@ -1,7 +1,7 @@
 CHANGES
 *******
 
-0.2 (unreleased)
+0.2 (2011-06-02)
 ================
 
 - Error when referring to non-existent po file
