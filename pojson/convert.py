@@ -1,6 +1,7 @@
 import argh
 import simplejson
 import polib
+import os
 
 def po2dict(po):
     """Convert po object to dictionary data structure (ready for JSON).
@@ -23,6 +24,9 @@ def po2dict(po):
     return result
 
 def convert(domain, po_file, js=False, encoding=None, pretty_print=False):
+    if not os.path.isfile(po_file):
+        raise argh.exceptions.CommandError(u"Not a file: %s" % po_file)
+    
     if encoding is None:
         po = polib.pofile(po_file,
                           autodetect_encoding=True)
