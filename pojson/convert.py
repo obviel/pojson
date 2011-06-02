@@ -14,7 +14,7 @@ def po2dict(po):
         if entry.obsolete:
             continue
         if entry.msgstr:
-            result[entry.msgid] = entry.msgstr
+            result[entry.msgid] = [None, entry.msgstr]
         elif entry.msgstr_plural:
             plural = [entry.msgid_plural]
             result[entry.msgid] = plural
@@ -26,7 +26,8 @@ def po2dict(po):
 def convert(domain, po_file, js=False, encoding=None, pretty_print=False):
     if not os.path.isfile(po_file):
         raise argh.exceptions.CommandError(u"Not a file: %s" % po_file)
-    
+    if not po_file.endswith('.po'):
+        raise argh.exceptions.CommandError(u"Not a PO file: %s" % po_file)
     if encoding is None:
         po = polib.pofile(po_file,
                           autodetect_encoding=True)

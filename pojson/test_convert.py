@@ -16,7 +16,7 @@ def test_po2dict():
     
     result = po2dict(po)
 
-    assert result == {'': {}, u'Hello world': u'Hallo wereld'}
+    assert result == {'': {}, u'Hello world': [None, u'Hallo wereld']}
 
 def test_po2dict_with_metadata():
     po = polib.POFile()
@@ -29,7 +29,7 @@ def test_po2dict_with_metadata():
     result = po2dict(po)
 
     assert result == {'': {'Project-Id-Version': '1.0'},
-                      u'Hello world': u'Hallo wereld'}
+                      'Hello world': [None, u'Hallo wereld']}
 
 def test_convert(tmpdir):
     po = polib.POFile()
@@ -44,7 +44,7 @@ def test_convert(tmpdir):
     
     result = convert('foo', path)
     # XXX dependent on default key sorting of simplejson
-    assert result == '{"foo": {"": {}, "Hello world": "Hallo wereld"}}'
+    assert result == '{"foo": {"": {}, "Hello world": [null, "Hallo wereld"]}}'
 
 def test_convert_detect_encoding(tmpdir):
     po = polib.POFile()
@@ -59,7 +59,7 @@ def test_convert_detect_encoding(tmpdir):
 
     result = convert('foo', path)
     # XXX dependent on default key sorting of simplejson
-    assert result == u'{"foo": {"": {}, "One": "Eén"}}'
+    assert result == u'{"foo": {"": {}, "One": [null, "Eén"]}}'
 
 def test_convert_explicit_encoding(tmpdir):
     po = polib.POFile()
@@ -74,7 +74,7 @@ def test_convert_explicit_encoding(tmpdir):
 
     result = convert('foo', path, encoding='utf-8')
     # XXX dependent on default key sorting of simplejson
-    assert result == u'{"foo": {"": {}, "One": "Eén"}}'
+    assert result == u'{"foo": {"": {}, "One": [null, "Eén"]}}'
 
 def test_convert_pretty_print(tmpdir):
     po = polib.POFile()
@@ -95,7 +95,10 @@ def test_convert_pretty_print(tmpdir):
 {
     "foo": {
         "": {},
-        "One": "Een"
+        "One": [
+            null,
+            "Een"
+        ]
     }
 }'''
     
@@ -114,7 +117,7 @@ def test_convert_javascript(tmpdir):
 
     result = convert('foo', path, encoding='utf-8',
                      js=True)
-    assert result == u'var json_locale_data = {"foo": {"": {}, "One": "Een"}};'
+    assert result == u'var json_locale_data = {"foo": {"": {}, "One": [null, "Een"]}};'
 
 def test_convert_javascript_prettyprint(tmpdir):
     po = polib.POFile()
@@ -130,13 +133,17 @@ def test_convert_javascript_prettyprint(tmpdir):
     result = convert('foo', path, encoding='utf-8',
                      js=True, pretty_print=True)
     
+
     # XXX apparently different versions of simplejson use different
     # pretty printing algorithms, so this may break
     assert result == u'''\
 var json_locale_data = {
     "foo": {
         "": {},
-        "One": "Een"
+        "One": [
+            null,
+            "Een"
+        ]
     }
 };'''
     

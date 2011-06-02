@@ -4,8 +4,10 @@ CHANGES
 0.3 (unreleased)
 ================
 
-- Nothing changed yet.
+- Actually got the output wrong so jsgettext couldn't work with it. Fixed.
 
+- Some sanity checking that the input file has the .po extension, as
+  evidently polib accepts *any* file and still gives output...
 
 0.2 (2011-06-02)
 ================
