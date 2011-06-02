@@ -11,7 +11,7 @@ long_description = (
 
 setup(
     name='pojson',
-    version='0.2',
+    version='0.3dev',
     description="Convert PO files to JSON",
     long_description=long_description,
     keywords='PO i18n internationalisation JSON gettext',
