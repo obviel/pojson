@@ -1,36 +1,38 @@
 pojson
 ******
 
-pojson is a tool that allows you to create JSON data (and .js) files
-from PO files. The JSON and .js files are compatible with the format
-required by `Javascript Gettext`_. It can be used instead of the
-Perl-based po2json tool included in this project.
+pojson is a tool that allows you to create JSON data files from PO
+files. These files are designed to be used with Obviel_'s `i18n support`_.
 
-Basic use::
+.. _Obviel: http://obviel.org/
 
-  $ pojson convert <translation_domain> <path/to/po> 
+.. _`i18n support`: http://www.obviel.org/en/latest/i18n.html
 
-Generate .js file::
+The `Javascript Gettext`_ already provides a Perl-based tool (po2json)
+that is very similar, so this can be seen as a rewrite to Python. One
+difference is that pojson does not output domain information in the
+resulting datastructure - it is one level less deep. The domain
+information must instead be supplied when the file is loaded.
 
-  $ pojson convert -j <translation_domain> <path/to/po>
+Basic use to generate a JSON file::
+
+  $ pojson <path/to/po> 
 
 Pretty-print output::
 
-  $ pojson convert -p <translation_domain> <path/to/po> 
+  $ pojson -p <path/to/po> 
 
 Help::
   
-  $ pojson convert --help
+  $ pojson --help
 
 Normally you would send the output to a file, such as::
 
-  $ pojson convert myproject something.po > something.json
+  $ pojson something.po > something.json
   
-  $ pojson convert -j myproject something.po > something.js
-
 Normally pojson will try to guess the encoding of the .po file, but
 you can also explicitly supply an encoding::
 
-  $ pojson convert -e utf-8 myproject something.po > something.json
+  $ pojson -e utf-8 something.po > something.json
 
 _`Javascript Gettext`: http://jsgettext.berlios.de/

@@ -4,8 +4,8 @@ CHANGES
 0.4 (unreleased)
 ================
 
-- Nothing changed yet.
-
+- Totally break the command line interface to simplify options. We
+  only want to generate those JSON files that Obviel likes.
 
 0.3 (2011-06-02)
 ================
