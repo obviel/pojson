@@ -1,7 +1,7 @@
-import argh
 import simplejson
 import polib
 import os
+import argparse
 
 def po2dict(po):
     """Convert po object to dictionary data structure (ready for JSON).
@@ -23,11 +23,7 @@ def po2dict(po):
                 plural.append(msgstr)
     return result
 
-def convert(domain, po_file, js=False, encoding=None, pretty_print=False):
-    if not os.path.isfile(po_file):
-        raise argh.exceptions.CommandError(u"Not a file: %s" % po_file)
-    if not po_file.endswith('.po'):
-        raise argh.exceptions.CommandError(u"Not a PO file: %s" % po_file)
+def convert(po_file, encoding=None, pretty_print=False):
     if encoding is None:
         po = polib.pofile(po_file,
                           autodetect_encoding=True)
@@ -36,16 +32,13 @@ def convert(domain, po_file, js=False, encoding=None, pretty_print=False):
                           autodetect_encoding=False,
                           encoding=encoding)
     
-    domain_data = po2dict(po)
+    data = po2dict(po)
     
-    d = { domain: domain_data }
     if not pretty_print:
-        result = simplejson.dumps(d, ensure_ascii=False, sort_keys=True)
+        result = simplejson.dumps(data, ensure_ascii=False, sort_keys=True)
     else:
-        result = simplejson.dumps(d, sort_keys=True, indent=4 * ' ',
+        result = simplejson.dumps(data, sort_keys=True, indent=4 * ' ',
                                   ensure_ascii=False)
-    if js:
-        result = 'var json_locale_data = ' + result + ';'
     return result
 
         

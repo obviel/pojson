@@ -42,9 +42,9 @@ def test_convert(tmpdir):
     path = tmpdir.join('test.po').strpath
     po.save(path)
     
-    result = convert('foo', path)
+    result = convert(path)
     # XXX dependent on default key sorting of simplejson
-    assert result == '{"foo": {"": {}, "Hello world": [null, "Hallo wereld"]}}'
+    assert result == '{"": {}, "Hello world": [null, "Hallo wereld"]}'
 
 def test_convert_detect_encoding(tmpdir):
     po = polib.POFile()
@@ -57,9 +57,9 @@ def test_convert_detect_encoding(tmpdir):
     path = tmpdir.join('test.po').strpath
     po.save(path)
 
-    result = convert('foo', path)
+    result = convert(path)
     # XXX dependent on default key sorting of simplejson
-    assert result == u'{"foo": {"": {}, "One": [null, "Eén"]}}'
+    assert result == u'{"": {}, "One": [null, "Eén"]}'
 
 def test_convert_explicit_encoding(tmpdir):
     po = polib.POFile()
@@ -72,9 +72,9 @@ def test_convert_explicit_encoding(tmpdir):
     path = tmpdir.join('test.po').strpath
     po.save(path)
 
-    result = convert('foo', path, encoding='utf-8')
+    result = convert(path, encoding='utf-8')
     # XXX dependent on default key sorting of simplejson
-    assert result == u'{"foo": {"": {}, "One": [null, "Eén"]}}'
+    assert result == u'{"": {}, "One": [null, "Eén"]}'
 
 def test_convert_pretty_print(tmpdir):
     po = polib.POFile()
@@ -87,65 +87,18 @@ def test_convert_pretty_print(tmpdir):
     path = tmpdir.join('test.po').strpath
     po.save(path)
 
-    result = convert('foo', path, pretty_print=True)
+    result = convert(path, pretty_print=True)
 
     # XXX apparently different versions of simplejson use different
     # pretty printing algorithms, so this may break
     assert result == u'''\
 {
-    "foo": {
-        "": {},
-        "One": [
-            null,
-            "Een"
-        ]
-    }
+    "": {},
+    "One": [
+        null,
+        "Een"
+    ]
 }'''
-    
-    
-
-def test_convert_javascript(tmpdir):
-    po = polib.POFile()
-    po.metadata = {}
-    entry = polib.POEntry(
-        msgid=u'One',
-        msgstr=u'Een')
-    po.append(entry)
-
-    path = tmpdir.join('test.po').strpath
-    po.save(path)
-
-    result = convert('foo', path, encoding='utf-8',
-                     js=True)
-    assert result == u'var json_locale_data = {"foo": {"": {}, "One": [null, "Een"]}};'
-
-def test_convert_javascript_prettyprint(tmpdir):
-    po = polib.POFile()
-    po.metadata = {}
-    entry = polib.POEntry(
-        msgid=u'One',
-        msgstr=u'Een')
-    po.append(entry)
-
-    path = tmpdir.join('test.po').strpath
-    po.save(path)
-
-    result = convert('foo', path, encoding='utf-8',
-                     js=True, pretty_print=True)
-    
-
-    # XXX apparently different versions of simplejson use different
-    # pretty printing algorithms, so this may break
-    assert result == u'''\
-var json_locale_data = {
-    "foo": {
-        "": {},
-        "One": [
-            null,
-            "Een"
-        ]
-    }
-};'''
     
     
 def pytest_funcarg__nl_po(request):
@@ -160,4 +113,4 @@ def test_po2dict_with_plural(nl_po):
                       u'1 veld kon niet gevalideerd worden',
                       u'%1 velden konden niet gevalideerd worden']
 
-    
+
