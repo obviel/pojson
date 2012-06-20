@@ -1,7 +1,7 @@
 CHANGES
 *******
 
-0.4 (unreleased)
+0.4 (2012-06-20)
 ================
 
 - Totally break the command line interface to simplify options. We
