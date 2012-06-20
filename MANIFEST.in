@@ -1,0 +1,3 @@
+include *.txt *.cfg *.py
+exclude .installed.cfg
+recursive-include pojson *.py *.po
