@@ -5,7 +5,8 @@ CHANGES
 ================
 
 - Totally break the command line interface to simplify options. We
-  only want to generate those JSON files that Obviel i18n likes.
+  only want to generate those JSON files that Obviel i18n likes. Works
+  with Obviel 1.0b2 and later.
 
 0.3 (2011-06-02)
 ================
