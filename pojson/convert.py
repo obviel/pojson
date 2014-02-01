@@ -13,11 +13,17 @@ def po2dict(po):
     for entry in po:
         if entry.obsolete:
             continue
+
+        if entry.msgctxt:
+            key = u'{0}\x04{1}'.format(entry.msgctxt, entry.msgid)
+        else:
+            key = entry.msgid
+
         if entry.msgstr:
-            result[entry.msgid] = [None, entry.msgstr]
+            result[key] = [None, entry.msgstr]
         elif entry.msgstr_plural:
             plural = [entry.msgid_plural]
-            result[entry.msgid] = plural
+            result[key] = plural
             ordered_plural = sorted(entry.msgstr_plural.items())
             for order, msgstr in ordered_plural:
                 plural.append(msgstr)

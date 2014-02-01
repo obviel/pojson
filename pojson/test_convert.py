@@ -18,6 +18,21 @@ def test_po2dict():
 
     assert result == {'': {}, u'Hello world': [None, u'Hallo wereld']}
 
+def test_po2dict_with_ctxt():
+    po = polib.POFile()
+    po.metadata = {}
+    entry = polib.POEntry(
+        msgctxt=u'system context',
+        msgid=u'Hello world',
+        msgstr=u'Hallo wereld')
+    po.append(entry)
+
+    result = po2dict(po)
+
+    assert result == {
+        '': {},
+        u'system context\x04Hello world': [None, u'Hallo wereld']}
+
 def test_po2dict_with_metadata():
     po = polib.POFile()
     po.metadata = {'Project-Id-Version': '1.0'}
