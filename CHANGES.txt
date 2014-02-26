@@ -4,8 +4,9 @@ CHANGES
 0.5 (unreleased)
 ================
 
-- Nothing changed yet.
-
+- Support for the context feature in Javascript gettext. See
+  http://jsgettext.berlios.de/doc/html/Gettext.html#pgettext__msgctxt__msgid__
+  Thanks to Hong Minhee for this feature. 
 
 0.4 (2012-06-20)
 ================
