@@ -31,7 +31,10 @@ setup(
     entry_points= {
         'console_scripts': [
             'pojson = pojson.main:main',
-        ]
+        ],
+        'distutils.commands': [
+            'po2json = pojson.frontend:po2json'
+        ],
         },
     
     )
