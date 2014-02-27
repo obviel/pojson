@@ -1,7 +1,7 @@
 CHANGES
 *******
 
-0.5 (unreleased)
+0.5 (2014-02-27)
 ================
 
 - Support for the context feature in Javascript gettext. See
