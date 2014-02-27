@@ -32,7 +32,7 @@ def pytest_funcarg__input_files(request):
         os.path.join(
             os.path.dirname(request.module.__file__), 'testdata', 'nl.po'),
         os.path.join(
-            os.path.dirname(request.module.__file__), 'testdata', 'nl2.po')
+            os.path.dirname(request.module.__file__), 'testdata', 'ko.po')
     ])
 
 
@@ -59,7 +59,7 @@ def check_po_to_json(po_file, output_dir):
 
     try:
         with open(json_file) as f:
-            assert f.read() == convert(po_file)
+            assert f.read() == convert(po_file).encode("utf-8")
     finally:
         os.unlink(json_file)
 

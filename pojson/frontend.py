@@ -61,4 +61,5 @@ class po2json(Command):
                                                                json_file))
 
             with open(json_file, "wb") as f:
-                f.write(convert(po_file, pretty_print=self.pretty_print))
+                f.write(convert(po_file, pretty_print=self.pretty_print)
+                        .encode("utf-8"))
