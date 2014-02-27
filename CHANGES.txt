@@ -12,10 +12,10 @@ CHANGES
 
 - Support for the context feature in Javascript gettext. See
   http://jsgettext.berlios.de/doc/html/Gettext.html#pgettext__msgctxt__msgid__
-  Thanks to Hong Minhee for this feature.
+  Thanks to Swen Mun (@longfin) for this feature.
 
 - Added distutils command class ``po2json`` to compile catalogs for
-  use in ``setup.py``.  Thanks to Hong Minhee for this feature.
+  use in ``setup.py``.  Thanks to Swen Mun (@longfin) for this feature.
 
 0.4 (2012-06-20)
 ================
