@@ -4,8 +4,10 @@ CHANGES
 0.6 (unreleased)
 ================
 
-- Nothing changed yet.
+- A new po2json_babel command that lets you create a babel compatible
+  catalog structure. Thanks to Swen Mun (@longfin) for this feature.
 
+- A bugfix concerning encoding handling in po2json.
 
 0.5 (2014-02-27)
 ================
