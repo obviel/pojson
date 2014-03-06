@@ -33,7 +33,8 @@ setup(
             'pojson = pojson.main:main',
         ],
         'distutils.commands': [
-            'po2json = pojson.frontend:po2json'
+            'po2json = pojson.frontend:po2json',
+            'po2json_babel = pojson.frontend:po2json_babel'
         ],
         },
     
