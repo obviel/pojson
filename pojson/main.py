@@ -1,6 +1,8 @@
 import argparse
 import pojson
 import os
+from . import PY3K
+
 
 def main():
     p = argparse.ArgumentParser(description='convert .po to .json')
@@ -15,7 +17,11 @@ def main():
     if not args.po_file.endswith('.po'):
         p.exit(u"not a PO file: %s" % args.po_file)
 
-    print pojson.convert(
-        args.po_file, encoding=args.encoding,
-        pretty_print=args.pretty_print).encode('utf-8')
-    
+    if PY3K:
+        print(pojson.convert(
+            args.po_file, encoding=args.encoding,
+            pretty_print=args.pretty_print))
+    else:
+        print(pojson.convert(
+            args.po_file, encoding=args.encoding,
+            pretty_print=args.pretty_print).encode('utf-8'))

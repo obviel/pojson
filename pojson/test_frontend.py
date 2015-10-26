@@ -10,6 +10,8 @@ from pytest import raises
 from pojson.convert import convert
 from pojson.frontend import po2json, po2json_babel
 
+from pojson import PY3K
+
 
 def pytest_funcarg__po2json(request):
     dist = Distribution(dict(
@@ -59,7 +61,10 @@ def check_po_to_json(po_file, output_dir):
 
     try:
         with open(json_file) as f:
-            assert f.read() == convert(po_file).encode("utf-8")
+            if PY3K:
+                assert f.read() == convert(po_file)
+            else:
+                assert f.read() == convert(po_file).encode("utf-8")
     finally:
         os.unlink(json_file)
 

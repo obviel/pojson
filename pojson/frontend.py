@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 import os
-from itertools import izip
+try:
+    from itertools import izip
+except ImportError:
+    # for python3
+    izip = zip
 
 from distutils import log
 from distutils.cmd import Command
